@@ -1,59 +1,168 @@
-# TechsyslogWeb
+# TechsysLogWeb – Frontend Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.6.
+Frontend do sistema **TechsysLog**, desenvolvido com **Angular**, responsável pela interface do usuário para **autenticação, visualização e gerenciamento de pedidos, entregas e notificações em tempo real**, integrando-se ao backend via **API REST** e **SignalR**.
 
-## Development server
+Este projeto foi construído com foco em **performance**, **lazy loading**, **organização modular**, **boas práticas de arquitetura frontend** e **experiência do usuário**.
 
-To start a local development server, run:
+---
+
+## 1. Objetivo do Projeto
+
+O objetivo deste frontend é fornecer uma aplicação web moderna capaz de:
+
+- Autenticar usuários via JWT
+- Manter sessão ativa mesmo após reload
+- Exibir pedidos e entregas
+- Receber notificações em tempo real
+- Garantir navegação segura via guards
+- Consumir APIs REST de forma eficiente
+- Suportar crescimento do projeto com lazy loading e módulos isolados
+
+---
+
+## 2. Visão Funcional
+
+Funcionalidades implementadas no frontend:
+
+- Tela de Login
+- Tela de Registro de Usuário
+- Layout protegido para usuários autenticados
+- Listagem de pedidos
+- Listagem de entregas
+- Central de notificações
+- Comunicação em tempo real com o backend
+- Persistência de autenticação no reload da página
+- Tratamento global de erros HTTP
+
+---
+
+## 3. Arquitetura do Frontend
+
+A aplicação segue uma arquitetura **modular e escalável**, alinhada às boas práticas recomendadas pelo Angular moderno.
+
+Princípios adotados:
+
+- Separação clara de responsabilidades
+- Componentes com responsabilidades únicas
+- Serviços desacoplados
+- Guards para controle de acesso
+- Lazy Loading para otimização de performance
+- Standalone Components
+
+---
+
+
+---
+
+## 4. Responsabilidade das Camadas
+
+### Core
+Contém elementos reutilizáveis e transversais da aplicação:
+
+- Serviços globais
+- Interceptors HTTP
+- Guards de autenticação
+- Models e contratos
+
+### Features
+Cada funcionalidade da aplicação fica isolada em sua própria pasta:
+
+- auth (login e registro)
+- orders
+- deliveries
+- notifications
+
+### Layout
+Responsável pela estrutura visual da aplicação autenticada:
+
+- Header
+- Sidebar
+- Área de conteúdo
+
+---
+
+## 5. Roteamento e Segurança
+
+O roteamento é feito utilizando **Angular Router**, com proteção de rotas via **AuthGuard**.
+
+Exemplo conceitual:
+
+- Rotas públicas:
+  - `/login`
+  - `/register`
+
+- Rotas protegidas:
+  - `/orders`
+  - `/deliveries`
+  - `/notifications`
+
+Usuários não autenticados são redirecionados automaticamente para o login.
+
+---
+
+## 6. Autenticação e Sessão
+
+- Autenticação baseada em **JWT**
+- Token armazenado no `localStorage`
+- Interceptor adiciona automaticamente o token nas requisições
+- Validação de token no reload da aplicação
+- Usuário permanece logado enquanto o token for válido
+
+---
+
+## 7. Comunicação com o Backend
+
+- Consumo de API REST via `HttpClient`
+- URLs centralizadas
+- Tratamento global de erros HTTP
+- Serviços especializados por domínio
+
+---
+
+## 8. Notificações em Tempo Real
+
+- Integração com **SignalR**
+- Conexão estabelecida após autenticação
+- Atualizações recebidas em tempo real
+- Notificações exibidas sem necessidade de refresh
+
+---
+
+## 9. Performance e Otimização
+
+Medidas adotadas:
+
+- Lazy Loading de rotas
+- Standalone Components
+- Separação por features
+- Build otimizado para produção
+- Redução de acoplamento entre componentes
+
+---
+
+## 10. Tecnologias Utilizadas
+
+- Angular
+- TypeScript
+- Angular Router
+- RxJS
+- SignalR Client
+- Angular CLI
+- Vitest (testes)
+- HTML / CSS
+
+---
+
+## 11. Pré-requisitos
+
+- Node.js
+- Angular CLI
+
+---
+
+## 12. Servidor de Desenvolvimento
+
+Para iniciar o servidor local:
 
 ```bash
 ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
